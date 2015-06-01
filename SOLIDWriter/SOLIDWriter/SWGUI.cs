@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace SOLIDWriter
 {
-    public partial class Form1 : Form
+    public partial class SWGUI : Form
     {
-        public Form1()
+        public SWGUI()
         {
             InitializeComponent();
+            ScriptReader reader = new ScriptReader();
+            ScriptWriter writer = new ScriptWriter();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

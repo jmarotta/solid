@@ -5,6 +5,13 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOLIDWriter", "SOLIDWriter\SOLIDWriter.csproj", "{22935014-20E6-4565-9C28-DD902213A85B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1F5C1FB3-9B4C-45E8-9C97-29F1D18A5A8C}"
+	ProjectSection(SolutionItems) = preProject
+		ScriptReader.cs = ScriptReader.cs
+		ScriptWriter.cs = ScriptWriter.cs
+		SWMiddleLayer.cs = SWMiddleLayer.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

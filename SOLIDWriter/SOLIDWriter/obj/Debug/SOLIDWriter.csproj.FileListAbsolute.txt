@@ -1,1 +1,10 @@
 c:\users\joe\documents\visual studio 2013\Projects\SOLIDWriter\SOLIDWriter\bin\Debug\SOLIDWriter.exe.config
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\bin\Debug\SOLIDWriter.exe.config
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\bin\Debug\SOLIDWriter.exe
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\bin\Debug\SOLIDWriter.pdb
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.csprojResolveAssemblyReference.cache
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.Form1.resources
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.Properties.Resources.resources
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.csproj.GenerateResource.Cache
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.exe
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.pdb
