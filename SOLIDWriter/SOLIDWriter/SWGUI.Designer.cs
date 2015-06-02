@@ -41,9 +41,13 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instructionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cb_selectType = new System.Windows.Forms.ComboBox();
+            this.cb_SelectCommand = new System.Windows.Forms.ComboBox();
+            this.bt_AddLine = new System.Windows.Forms.Button();
+            this.fd_SelScript = new System.Windows.Forms.OpenFileDialog();
+            this.fd_SaveScript = new System.Windows.Forms.SaveFileDialog();
+            this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fd_GetConfig = new System.Windows.Forms.OpenFileDialog();
             this.ms_AllMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,12 +103,14 @@
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -115,7 +121,8 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.configureSettingsToolStripMenuItem});
+            this.configureSettingsToolStripMenuItem,
+            this.loadConfigurationToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -123,7 +130,7 @@
             // configureSettingsToolStripMenuItem
             // 
             this.configureSettingsToolStripMenuItem.Name = "configureSettingsToolStripMenuItem";
-            this.configureSettingsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.configureSettingsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.configureSettingsToolStripMenuItem.Text = "Configure Settings";
             // 
             // helpToolStripMenuItem
@@ -147,39 +154,56 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // comboBox1
+            // cb_selectType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 48);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(117, 21);
-            this.comboBox1.TabIndex = 2;
+            this.cb_selectType.FormattingEnabled = true;
+            this.cb_selectType.Location = new System.Drawing.Point(12, 48);
+            this.cb_selectType.Name = "cb_selectType";
+            this.cb_selectType.Size = new System.Drawing.Size(117, 21);
+            this.cb_selectType.TabIndex = 2;
             // 
-            // comboBox2
+            // cb_SelectCommand
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(206, 48);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(156, 21);
-            this.comboBox2.TabIndex = 3;
+            this.cb_SelectCommand.FormattingEnabled = true;
+            this.cb_SelectCommand.Location = new System.Drawing.Point(206, 48);
+            this.cb_SelectCommand.Name = "cb_SelectCommand";
+            this.cb_SelectCommand.Size = new System.Drawing.Size(156, 21);
+            this.cb_SelectCommand.TabIndex = 3;
             // 
-            // button1
+            // bt_AddLine
             // 
-            this.button1.Location = new System.Drawing.Point(273, 108);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bt_AddLine.Location = new System.Drawing.Point(273, 108);
+            this.bt_AddLine.Name = "bt_AddLine";
+            this.bt_AddLine.Size = new System.Drawing.Size(75, 23);
+            this.bt_AddLine.TabIndex = 4;
+            this.bt_AddLine.Text = "Add Line";
+            this.bt_AddLine.UseVisualStyleBackColor = true;
+            this.bt_AddLine.Click += new System.EventHandler(this.bt_AddLine_Click);
+            // 
+            // fd_SelScript
+            // 
+            this.fd_SelScript.FileName = "fName";
+            this.fd_SelScript.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // loadConfigurationToolStripMenuItem
+            // 
+            this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
+            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.loadConfigurationToolStripMenuItem.Text = "Load Configuration";
+            this.loadConfigurationToolStripMenuItem.Click += new System.EventHandler(this.loadConfigurationToolStripMenuItem_Click);
+            // 
+            // fd_GetConfig
+            // 
+            this.fd_GetConfig.FileName = "openFileDialog1";
             // 
             // SWGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(415, 343);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.bt_AddLine);
+            this.Controls.Add(this.cb_SelectCommand);
+            this.Controls.Add(this.cb_selectType);
             this.Controls.Add(this.lv_DisplayScript);
             this.Controls.Add(this.ms_AllMenu);
             this.MainMenuStrip = this.ms_AllMenu;
@@ -207,9 +231,13 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem instructionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cb_selectType;
+        private System.Windows.Forms.ComboBox cb_SelectCommand;
+        private System.Windows.Forms.Button bt_AddLine;
+        private System.Windows.Forms.OpenFileDialog fd_SelScript;
+        private System.Windows.Forms.SaveFileDialog fd_SaveScript;
+        private System.Windows.Forms.ToolStripMenuItem loadConfigurationToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog fd_GetConfig;
 
 
 

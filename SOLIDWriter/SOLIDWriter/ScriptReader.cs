@@ -12,9 +12,9 @@ public class ScriptReader
         // May need to implement ScriptWriter here to allow for dictionary lookup.
         // Or not...
 	}
-/*
+
     // Reads files.  This is the list-returning method.
-    public List<string> ReadScripts(string fPath) 
+    public List<string> ReadScriptsList(string fPath) 
     {
         List<string> fContents = new List<string>();
         using (StreamReader sr = new StreamReader(fPath))
@@ -28,7 +28,7 @@ public class ScriptReader
         }
         return fContents;
     }
-*/
+
     // Reads files.  Returns array of strings.  This is how overloading works, right?
     public string[] ReadScripts(string fPath)
     {
@@ -36,16 +36,15 @@ public class ScriptReader
         return lines;
     }
 
-    // Reads from XML configuration file and produces dictionary
+    // Reads from XML configuration file and produces dictionary.
     public Dictionary<string, string> ReadConfiguration(string FilePath)
     {
         Dictionary<string, string> commandDict = new Dictionary<string, string>();
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(FilePath);
-        // Need to settle on XML structure.  Could use attributes or nodes.  FILL THIS IN.
-        foreach (XmlNode xmlNode in xmlDoc.DocumentElement.ChildNodes[x])
-            // Should probably iterate over ALL attributes or subnodes
-            commandDict.Add(xmlNode.Attributes[""].Value,xmlNode.Attributes[""]);
+        // Creates a dictionary.  Key: firmware command to SOLiD system; Value: user-readable command.
+        foreach (XmlNode xmlNode in xmlDoc.DocumentElement.ChildNodes)
+            commandDict.Add(xmlNode.Attributes["solidcommand"].Value.ToString(),xmlNode.Attributes["usercommand"].Value.ToString());
         return commandDict;
     }
 
@@ -62,11 +61,14 @@ public class ScriptReader
     {
         int i = 0;
         string[] corrLines = fileLines;
-        string pattern = "<LINE-\\d>";
-        Regex regx = new Regex(pattern);
+        string startPattern = @"<LINE-\d>\(\.*\)\(";
+        string endPattern = @"\)(\(.?\)){4}";
+        Regex startreg = new Regex(startPattern);
+        Regex endreg = new Regex(endPattern);
         foreach (string line in fileLines)
         {
-            corrLines[i] = regx.Replace(line, "");
+            corrLines[i] = startreg.Replace(line, "");
+            corrLines[i] = endreg.Replace(corrLines[i], "");
             i++;
         }
         return corrLines;
