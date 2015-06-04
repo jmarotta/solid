@@ -58,7 +58,7 @@ public class SWMiddleLayer
         foreach(string cmd in lvItems)
         {
             string steppedLine = writer.AppendStep(lvItems.IndexOf(cmd),cmd);
-            string finalLine = writer.AppendLast(steppedLine,curType);
+            string finalLine = writer.AppendLast(steppedLine, "type1");//curType);
             outputItems.Add(finalLine);
         }
         foreach (string outLine in outputItems) writer.WriteLineToFile(outpath, outLine);
@@ -79,4 +79,5 @@ public class SWMiddleLayer
     }
 
     // Sets the type for the last part of each line (the (X)()(X)(), etc)
+
 }

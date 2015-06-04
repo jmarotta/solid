@@ -20,15 +20,16 @@ namespace SOLIDWriter
         public string configPath
         {
             get {return String.Concat(Path.GetDirectoryName(Application.ExecutablePath), "configuration.xml"); }
-            set { cfp = value; }
+            set
+            { cfp = value; }
         }
-
+        
         public SWGUI()
         {
 
             InitializeComponent();
             this.populateSelectType();
-           
+            
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -44,7 +45,7 @@ namespace SOLIDWriter
             if (result == DialogResult.OK)
             {
                 // Populate the listview.
-                lvPop = swml.ListViewFormat(result.ToString(), configPath);
+                lvPop = swml.ListViewFormat(fd_SelScript.FileName, configPath);
             }
         }
 
@@ -64,7 +65,12 @@ namespace SOLIDWriter
         {
             string cmd = cb_SelectCommand.SelectedItem.ToString();
             int currLineIdx = lv_DisplayScript.SelectedIndices[0];
-            lv_DisplayScript.Items.Insert(currLineIdx, cmd);
+            ListViewItem.ListViewSubItem lineNo = new ListViewItem.ListViewSubItem();
+            lineNo.Text = (currLineIdx + 2).ToString();
+            ListViewItem.ListViewSubItem curCmd = new ListViewItem.ListViewSubItem();
+            curCmd.Text = cmd;
+            lv_DisplayScript.Items[0].SubItems.Insert(currLineIdx + 1, lineNo);
+            lv_DisplayScript.Items[1].SubItems.Insert(currLineIdx + 1, curCmd);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -72,9 +78,10 @@ namespace SOLIDWriter
             DialogResult svres = fd_SaveScript.ShowDialog();
             if (svres == DialogResult.OK)
             {
+                string svPth = fd_SaveScript.FileName;
                 List<string> scriptItems = new List<string>();
                 foreach (ListViewItem lvi in lv_DisplayScript.Items) scriptItems.Add(lvi.ToString());
-                swml.WriteToFile(scriptItems, svres.ToString());
+                swml.WriteToFile(scriptItems, svPth);
             }
         }
 
@@ -83,8 +90,31 @@ namespace SOLIDWriter
             DialogResult configDat = fd_GetConfig.ShowDialog();
             if (configDat == DialogResult.OK)
             {
-                cfp = configDat.ToString();
+                cfp = fd_GetConfig.FileName;
             }            
+        }
+
+        private void PopulateListView(List<string> formattedCommands)
+        {
+            int i = 0;
+            foreach (string str in formattedCommands)
+            {
+                lv_DisplayScript.Items[0].SubItems.Add((i + 1).ToString());
+                lv_DisplayScript.Items[1].SubItems.Add(str);
+            }
+        }
+
+        private void cb_selectType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cb_SelectCommand.Items.Clear();
+            string cmdType = cb_selectType.SelectedItem.ToString();
+            List<string> sortedCommands = swml.GetCommandByType(configPath, cmdType);
+            foreach (string cmd in sortedCommands) cb_SelectCommand.Items.Add(cmd);
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();  
         }
 
     }
