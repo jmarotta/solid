@@ -19,10 +19,11 @@ namespace SOLIDWriter
         private string cfp;
         public string configPath
         {
-            get {return String.Concat(Path.GetDirectoryName(Application.ExecutablePath), "configuration.xml"); }
+            get {return Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "configuration.xml").ToString(); }
             set
             { cfp = value; }
         }
+        
         
         public SWGUI()
         {
@@ -57,7 +58,7 @@ namespace SOLIDWriter
         private void populateSelectType()
         {
             cb_selectType.Items.Add("pump");
-            cb_selectType.Items.Add("set_temp");
+            cb_selectType.Items.Add("temp");
             cb_selectType.Items.Add("wait");
         }
 
@@ -107,8 +108,9 @@ namespace SOLIDWriter
         private void cb_selectType_SelectedIndexChanged(object sender, EventArgs e)
         {
             cb_SelectCommand.Items.Clear();
+            cb_SelectCommand.Text = "";
             string cmdType = cb_selectType.SelectedItem.ToString();
-            List<string> sortedCommands = swml.GetCommandByType(configPath, cmdType);
+            List<string> sortedCommands = swml.GetCommandByType(this.configPath, cmdType);
             foreach (string cmd in sortedCommands) cb_SelectCommand.Items.Add(cmd);
         }
 

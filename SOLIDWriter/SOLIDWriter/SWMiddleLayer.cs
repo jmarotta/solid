@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.IO;
 
 public class SWMiddleLayer
 {
@@ -38,10 +39,11 @@ public class SWMiddleLayer
     {
         XmlDocument xDoc = new XmlDocument();
         List<string> usableCmds = new List<string>();
-        xDoc.Load(dictPath);
+        if (File.Exists(dictPath)) xDoc.Load(dictPath);
         foreach(XmlNode xNode in xDoc.DocumentElement.ChildNodes)
         {
-            if (xNode.Attributes["type"].Value.ToString() == type)
+            XmlAttribute typeAttr = xNode.Attributes["type"];
+            if (typeAttr.Value.ToString() == type)
             {
                 usableCmds.Add(xNode.Attributes["usercommand"].Value.ToString());
             }
