@@ -23,11 +23,16 @@ public class SWMiddleLayer
         cmdDict = reader.ReadConfiguration(dictPath);
         foreach (string line in formatLines)
         {
-            string tmpLine = reader.FromFirmwareCommand(cmdDict, line);
-            tmpLine.Replace(@"<", "");
-            tmpLine.Replace(@">", "");
-            readableLines.Add(tmpLine);
-            i++;
+            if (line.StartsWith(@"<LINE"))
+            {
+                string tmpLine = reader.FromFirmwareCommand(cmdDict, line);
+                //tmpLine = reader.Formatter(tmpLine);
+                tmpLine.Replace(@"<", "");
+                tmpLine.Replace(@">", "");
+                readableLines.Add(tmpLine);
+                i++;
+            }
+            else { continue; }
         }
         return readableLines;
     }

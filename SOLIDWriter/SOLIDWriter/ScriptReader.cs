@@ -60,8 +60,8 @@ public class ScriptReader
     public string[] Formatter(string[] fileLines)
     {
         int i = 0;
-        string[] corrLines = fileLines;
-        string startPattern = @"<LINE-\d>\(\.*\)\(";
+        string[] corrLines = new string[fileLines.Length];
+        string startPattern = @"\<.*\>\(\.*\)\(";
         string endPattern = @"\)(\(.?\)){4}";
         Regex startreg = new Regex(startPattern);
         Regex endreg = new Regex(endPattern);
