@@ -42,7 +42,6 @@ namespace SOLIDWriter
         {
             DialogResult result = fd_SelScript.ShowDialog();
             List<string> lvPop = new List<string>();
-            //string dictPath = String.Concat(Path.GetDirectoryName(Application.ExecutablePath),"configuration.xml");
             if (result == DialogResult.OK)
             {
                 // Populate the listview.
@@ -65,12 +64,24 @@ namespace SOLIDWriter
         private void bt_AddLine_Click(object sender, EventArgs e)
         {
             string cmd = cb_SelectCommand.SelectedItem.ToString();
-            int currLineIdx = lv_DisplayScript.SelectedIndices[0];
-            ListViewItem.ListViewSubItem lineNo = new ListViewItem.ListViewSubItem();
+            int currLineIdx;
+            ListViewItem lineNo = new ListViewItem();
+            ListViewItem step = new ListViewItem();
+            lv_DisplayScript.Items.Add(lineNo);
+            lv_DisplayScript.Items.Add(step);
+            if (lv_DisplayScript.Items[0].SubItems.Count == 0)
+            {
+                currLineIdx = 0;
+            }
+            else
+            {
+                currLineIdx = lv_DisplayScript.SelectedIndices[0];
+            }
+            ListViewItem.ListViewSubItem curLine = new ListViewItem.ListViewSubItem();
             lineNo.Text = (currLineIdx + 2).ToString();
             ListViewItem.ListViewSubItem curCmd = new ListViewItem.ListViewSubItem();
             curCmd.Text = cmd;
-            lv_DisplayScript.Items[0].SubItems.Insert(currLineIdx + 1, lineNo);
+            lv_DisplayScript.Items[0].SubItems.Insert(currLineIdx + 1, curLine);
             lv_DisplayScript.Items[1].SubItems.Insert(currLineIdx + 1, curCmd);
         }
 
