@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.lv_DisplayScript = new System.Windows.Forms.ListView();
-            this.col_StepNum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_Step = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ms_AllMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +48,7 @@
             this.fd_SelScript = new System.Windows.Forms.OpenFileDialog();
             this.fd_SaveScript = new System.Windows.Forms.SaveFileDialog();
             this.fd_GetConfig = new System.Windows.Forms.OpenFileDialog();
-            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_RmvLine = new System.Windows.Forms.Button();
             this.ms_AllMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,26 +56,22 @@
             // 
             this.lv_DisplayScript.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.lv_DisplayScript.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.col_StepNum,
             this.col_Step});
+            this.lv_DisplayScript.FullRowSelect = true;
             this.lv_DisplayScript.GridLines = true;
-            this.lv_DisplayScript.Location = new System.Drawing.Point(13, 153);
+            this.lv_DisplayScript.HideSelection = false;
+            this.lv_DisplayScript.Location = new System.Drawing.Point(12, 153);
             this.lv_DisplayScript.MultiSelect = false;
             this.lv_DisplayScript.Name = "lv_DisplayScript";
-            this.lv_DisplayScript.Size = new System.Drawing.Size(390, 178);
+            this.lv_DisplayScript.Size = new System.Drawing.Size(391, 178);
             this.lv_DisplayScript.TabIndex = 0;
             this.lv_DisplayScript.UseCompatibleStateImageBehavior = false;
             this.lv_DisplayScript.View = System.Windows.Forms.View.Details;
             // 
-            // col_StepNum
-            // 
-            this.col_StepNum.Text = "Step Number";
-            this.col_StepNum.Width = 119;
-            // 
             // col_Step
             // 
             this.col_Step.Text = "Step";
-            this.col_Step.Width = 266;
+            this.col_Step.Width = 386;
             // 
             // ms_AllMenu
             // 
@@ -85,7 +81,7 @@
             this.helpToolStripMenuItem});
             this.ms_AllMenu.Location = new System.Drawing.Point(0, 0);
             this.ms_AllMenu.Name = "ms_AllMenu";
-            this.ms_AllMenu.Size = new System.Drawing.Size(415, 24);
+            this.ms_AllMenu.Size = new System.Drawing.Size(412, 24);
             this.ms_AllMenu.TabIndex = 1;
             this.ms_AllMenu.Text = "menuStrip1";
             this.ms_AllMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -120,6 +116,13 @@
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -200,18 +203,21 @@
             // 
             this.fd_GetConfig.FileName = "openFileDialog1";
             // 
-            // quitToolStripMenuItem
+            // btn_RmvLine
             // 
-            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.quitToolStripMenuItem.Text = "Quit";
-            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            this.btn_RmvLine.Location = new System.Drawing.Point(40, 108);
+            this.btn_RmvLine.Name = "btn_RmvLine";
+            this.btn_RmvLine.Size = new System.Drawing.Size(89, 23);
+            this.btn_RmvLine.TabIndex = 5;
+            this.btn_RmvLine.Text = "Remove Line";
+            this.btn_RmvLine.UseVisualStyleBackColor = true;
             // 
             // SWGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 343);
+            this.ClientSize = new System.Drawing.Size(412, 342);
+            this.Controls.Add(this.btn_RmvLine);
             this.Controls.Add(this.bt_AddLine);
             this.Controls.Add(this.cb_SelectCommand);
             this.Controls.Add(this.cb_selectType);
@@ -230,7 +236,6 @@
         #endregion
 
         private System.Windows.Forms.ListView lv_DisplayScript;
-        private System.Windows.Forms.ColumnHeader col_StepNum;
         private System.Windows.Forms.ColumnHeader col_Step;
         private System.Windows.Forms.MenuStrip ms_AllMenu;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -250,6 +255,7 @@
         private System.Windows.Forms.ToolStripMenuItem loadConfigurationToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog fd_GetConfig;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.Button btn_RmvLine;
 
 
 

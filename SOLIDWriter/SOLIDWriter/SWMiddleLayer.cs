@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.IO;
+using System.Text.RegularExpressions;
 
 public class SWMiddleLayer
 {
@@ -23,16 +24,19 @@ public class SWMiddleLayer
         cmdDict = reader.ReadConfiguration(dictPath);
         foreach (string line in formatLines)
         {
-            if (line.StartsWith(@"<"))
-            {                
-                //tmpLine = reader.Formatter(tmpLine);
-                string tmpLine = line.Replace(@"<", "");
-                tmpLine.Replace(@">", "");
-                string formLine = reader.FromFirmwareCommand(cmdDict, line);
-                readableLines.Add(formLine);
-                i++;
+            if (line != null)
+            {
+                if (line.StartsWith(@"<"))
+                {
+                    //tmpLine = reader.Formatter(tmpLine);
+                    string tmpLine = line.Replace(@"<", "");
+                    tmpLine = Regex.Replace(tmpLine, ">.*", "");
+                    string formLine = reader.FromFirmwareCommand(cmdDict, tmpLine);
+                    readableLines.Add(formLine);
+                    i++;
+                }
+                else { continue; }
             }
-            else { continue; }
         }
         return readableLines;
     }

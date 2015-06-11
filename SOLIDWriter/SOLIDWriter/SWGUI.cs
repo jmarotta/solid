@@ -46,6 +46,7 @@ namespace SOLIDWriter
             {
                 // Populate the listview.
                 lvPop = swml.ListViewFormat(fd_SelScript.FileName, configPath);
+                this.PopulateListView(lvPop);
             }
         }
 
@@ -65,24 +66,19 @@ namespace SOLIDWriter
         {
             string cmd = cb_SelectCommand.SelectedItem.ToString();
             int currLineIdx;
-            ListViewItem lineNo = new ListViewItem();
-            ListViewItem step = new ListViewItem();
-            lv_DisplayScript.Items.Add(lineNo);
-            lv_DisplayScript.Items.Add(step);
-            if (lv_DisplayScript.Items[0].SubItems.Count == 0)
+            if (lv_DisplayScript.Items.Count == 0 )
             {
                 currLineIdx = 0;
             }
+            else if (lv_DisplayScript.SelectedIndices.Count == 0)
+            {
+                currLineIdx = lv_DisplayScript.Items.Count;
+            }
             else
             {
-                currLineIdx = lv_DisplayScript.SelectedIndices[0];
+                currLineIdx = lv_DisplayScript.SelectedIndices[0] + 1;
             }
-            ListViewItem.ListViewSubItem curLine = new ListViewItem.ListViewSubItem();
-            lineNo.Text = (currLineIdx + 2).ToString();
-            ListViewItem.ListViewSubItem curCmd = new ListViewItem.ListViewSubItem();
-            curCmd.Text = cmd;
-            lv_DisplayScript.Items[0].SubItems.Insert(currLineIdx + 1, curLine);
-            lv_DisplayScript.Items[1].SubItems.Insert(currLineIdx + 1, curCmd);
+            lv_DisplayScript.Items.Insert(currLineIdx, cmd);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -111,9 +107,11 @@ namespace SOLIDWriter
             int i = 0;
             foreach (string str in formattedCommands)
             {
-                lv_DisplayScript.Items[0].SubItems.Add((i + 1).ToString());
-                lv_DisplayScript.Items[1].SubItems.Add(str);
+                lv_DisplayScript.Items.Add(str);
+                //lv_DisplayScript.Items[1].SubItems.Add(str);
             }
+            //lv_DisplayScript.Update();
+            
         }
 
         private void cb_selectType_SelectedIndexChanged(object sender, EventArgs e)

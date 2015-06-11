@@ -74,12 +74,13 @@ public class ScriptReader
             }else if (line.StartsWith(@"<"))
             {
                 string tmpLine = line.Split(')')[1].Replace(@"(","");
-                corrLines[i] = tmpLine.Replace("<","");
-                finalLines[i] = Regex.Replace(corrLines[i],">.*", "");
+                //corrLines[i] = tmpLine.Replace("<","");
+                //finalLines[i] = Regex.Replace(corrLines[i],">.*", "");
+                finalLines[i] = tmpLine;
                 i++;
             }
         }
-        return corrLines;
+        return finalLines;
     }
 
     /* Placeholder.  May want to implement this later.
