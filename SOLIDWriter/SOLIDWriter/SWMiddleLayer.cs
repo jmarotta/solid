@@ -61,14 +61,16 @@ public class SWMiddleLayer
     }
 
     // Actually writes the header and command set to file from a string list of listview items.
-    public void WriteToFile(List<string> lvItems, string outpath)
+    public void WriteToFile(List<string> lvItems, string dictPath, string outpath)
     {        
         List<string> outputItems = new List<string>();
+        Dictionary<string, List<string>> cmdList = writer.ReadConfiguration(dictPath);
         string[] head = writer.MakeHeader();
         foreach(string headItem in head) outputItems.Add(headItem);
-        foreach(string cmd in lvItems)
+        for (int stepLine = 0; stepLine < lvItems.Count; stepLine++)
         {
-            string steppedLine = writer.AppendStep(lvItems.IndexOf(cmd),cmd);
+            string actCmd = writer.ToFirmwareCommand(cmdList,lvItems[stepLine]);
+            string steppedLine = writer.AppendStep(stepLine, actCmd);
             string finalLine = writer.AppendLast(steppedLine, "type1");//curType);
             outputItems.Add(finalLine);
         }

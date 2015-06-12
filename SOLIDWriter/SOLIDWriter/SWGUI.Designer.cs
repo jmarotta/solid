@@ -49,6 +49,7 @@
             this.fd_SaveScript = new System.Windows.Forms.SaveFileDialog();
             this.fd_GetConfig = new System.Windows.Forms.OpenFileDialog();
             this.btn_RmvLine = new System.Windows.Forms.Button();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_AllMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,6 +90,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
@@ -211,6 +213,14 @@
             this.btn_RmvLine.TabIndex = 5;
             this.btn_RmvLine.Text = "Remove Line";
             this.btn_RmvLine.UseVisualStyleBackColor = true;
+            this.btn_RmvLine.Click += new System.EventHandler(this.btn_RmvLine_Click);
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // SWGUI
             // 
@@ -256,6 +266,7 @@
         private System.Windows.Forms.OpenFileDialog fd_GetConfig;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.Button btn_RmvLine;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
 
 
 

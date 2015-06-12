@@ -10,8 +10,8 @@ public class ScriptWriter
 	{
         string finalCommand;
         string prependCommand;
-        string stepNumberForm = String.Concat(@"<STEP", StepNum.ToString());
-        stepNumberForm = String.Concat(stepNumberForm, @">(");
+        string stepNumberForm = String.Concat(@"<LINE-", (StepNum + 1).ToString());
+        stepNumberForm = String.Concat(stepNumberForm, @">");
         prependCommand = String.Concat(stepNumberForm, Command);
         // Give this a meaningful type and a way to detect.
         finalCommand = this.AppendLast(prependCommand, "currtype");
@@ -31,12 +31,13 @@ public class ScriptWriter
     public Dictionary<string, List<string>> ReadConfiguration(string FilePath)
     {
         Dictionary<string, List<string>> commandDict = new Dictionary<string, List<string>>();
-        List<string> infos = new List<string>();
+        
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(FilePath);
         // Creates a dictionary.  Key: user-readable command; Value: firmware command to SOLiD system.
         foreach (XmlNode xmlNode in xmlDoc.DocumentElement.ChildNodes)
         {
+            List<string> infos = new List<string>();
             infos.Add(xmlNode.Attributes["solidcommand"].Value.ToString());
             infos.Add(xmlNode.Attributes["type"].Value.ToString());
             commandDict.Add(xmlNode.Attributes["usercommand"].Value.ToString(), infos);
@@ -49,20 +50,26 @@ public class ScriptWriter
     {
         string fwCmd;
         string preAmb = "";
-        string type = dict[inCmd][1];
+        string type = "none";
+        List<string> outStr;
+        if (dict.TryGetValue(inCmd, out outStr)) type = outStr[1];
         switch (type)
         { 
             case "temp":
-                preAmb = @"(FC1)";
+                preAmb = @"(FC1)(<";
                 break;
             case "pump":
-                preAmb = @"(PUMP)";
+                preAmb = @"(PUMP)(<";
                 break;
             case "wait":
-                preAmb = @"(TIMER)";
+                preAmb = @"(TIMER)(<";
+                break;
+            case "none":
+                preAmb = @"()(<";
                 break;
         }
-        fwCmd = String.Concat(preAmb, dict[inCmd][0]);
+        string prefwCmd = String.Concat(preAmb, outStr[0]);
+        fwCmd = String.Concat(prefwCmd, @">)");
         return fwCmd;
     }
 

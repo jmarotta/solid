@@ -87,9 +87,10 @@ namespace SOLIDWriter
             if (svres == DialogResult.OK)
             {
                 string svPth = fd_SaveScript.FileName;
+                if (File.Exists(svPth)) { File.Delete(svPth); }
                 List<string> scriptItems = new List<string>();
-                foreach (ListViewItem lvi in lv_DisplayScript.Items) scriptItems.Add(lvi.ToString());
-                swml.WriteToFile(scriptItems, svPth);
+                foreach (ListViewItem lvi in lv_DisplayScript.Items) scriptItems.Add(lvi.Text.ToString());
+                swml.WriteToFile(scriptItems, configPath, svPth);
             }
         }
 
@@ -108,10 +109,7 @@ namespace SOLIDWriter
             foreach (string str in formattedCommands)
             {
                 lv_DisplayScript.Items.Add(str);
-                //lv_DisplayScript.Items[1].SubItems.Add(str);
-            }
-            //lv_DisplayScript.Update();
-            
+            }            
         }
 
         private void cb_selectType_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,6 +124,26 @@ namespace SOLIDWriter
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();  
+        }
+
+        private void btn_RmvLine_Click(object sender, EventArgs e)
+        {
+            int currLineIdx;
+            if (lv_DisplayScript.SelectedIndices.Count == 0)
+            {
+                currLineIdx = lv_DisplayScript.Items.Count - 1;
+                lv_DisplayScript.Items.RemoveAt(currLineIdx);
+            }
+            else
+            {
+                currLineIdx = lv_DisplayScript.SelectedIndices[0];
+                lv_DisplayScript.Items.RemoveAt(currLineIdx);
+            }            
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lv_DisplayScript.Items.Clear();
         }
 
     }

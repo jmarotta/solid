@@ -62,10 +62,6 @@ public class ScriptReader
         int i = 0;
         string[] corrLines = new string[fileLines.Length];
         string[] finalLines = new string[fileLines.Length];
-        string startPattern = "^(<.*>\\(.*?\\))";
-        string endPattern = @"\)(\(.?\)){4}";
-        Regex startreg = new Regex(startPattern);
-        Regex endreg = new Regex(endPattern);
         foreach (string line in fileLines)
         {
             if (line.StartsWith(@"//"))
@@ -74,8 +70,6 @@ public class ScriptReader
             }else if (line.StartsWith(@"<"))
             {
                 string tmpLine = line.Split(')')[1].Replace(@"(","");
-                //corrLines[i] = tmpLine.Replace("<","");
-                //finalLines[i] = Regex.Replace(corrLines[i],">.*", "");
                 finalLines[i] = tmpLine;
                 i++;
             }
