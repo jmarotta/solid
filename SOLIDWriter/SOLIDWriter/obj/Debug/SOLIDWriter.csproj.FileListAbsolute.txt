@@ -8,3 +8,4 @@ C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWrite
 C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.exe
 C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.pdb
 C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.SWGUI.resources
+C:\Users\Joe\Documents\GitHub\solid\SOLIDWriter\SOLIDWriter\obj\Debug\SOLIDWriter.Resource1.resources
