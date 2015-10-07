@@ -1,0 +1,1 @@
+<configuration><command /><command etype="type5" solidcommand="/1S8o6A7200M500S8o6A0R" type="pump" usercommand="Mix" /><command etype="type10" solidcommand="set_temp 25" type="temp" usercommand="Set 25C" /><command etype="type7" solidcommand="120" type="wait" usercommand="Wait 120s" /></configuration>
